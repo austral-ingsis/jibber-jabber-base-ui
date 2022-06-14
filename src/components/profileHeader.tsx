@@ -4,6 +4,8 @@ import React, { ReactNode } from 'react'
 import { User } from '../data/users'
 import { SxProps } from '@mui/system'
 import { Theme } from '@mui/material/styles'
+import GenericAvatar from "./generic-avatar.jpg"
+
 
 export type ProfileHeaderProps = {
   user: User
@@ -33,7 +35,7 @@ export const ProfileHeader = ({user, actions}: ProfileHeaderProps) => {
 
         <Grid container>
           <Grid item xs={3}>
-            <Avatar src={user.avatar} sx={avatarStyle}/>
+            <Avatar src={GenericAvatar} sx={avatarStyle}/>
           </Grid>
           <Grid item xs={9}>
             <Container sx={profileTextStyle}>
@@ -43,12 +45,12 @@ export const ProfileHeader = ({user, actions}: ProfileHeaderProps) => {
               <Typography variant="body1" component="span">
                 @{user.username}
               </Typography>
-              <Divider sx={dividerStyle}/>
-              {user.bio && (
-                <Typography variant="body1" component="div">
-                  {user.bio}
-                </Typography>
-              )}
+              {/*<Divider sx={dividerStyle}/>*/}
+              {/*{user.bio && (*/}
+              {/*  <Typography variant="body1" component="div">*/}
+              {/*    {user.bio}*/}
+              {/*  </Typography>*/}
+              {/*)}*/}
             </Container>
           </Grid>
         </Grid>

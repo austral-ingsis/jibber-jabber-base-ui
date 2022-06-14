@@ -37,7 +37,7 @@ export const Home = () => {
 
   const handleCreatePost = useCallback((postText: string) => {
     if (state.loaded)
-      postData.createPost({user, text: postText})
+      postData.createPost({author: user.id, content: postText})
         .then(() => refreshPosts())
         .catch(error => console.error('Error while creating new post', error))
   }, [state, postData])

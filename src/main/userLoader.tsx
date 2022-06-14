@@ -1,10 +1,11 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { User } from '../data/users'
 import { Loading } from '../components/loading'
-import { UserContext } from '../components/contexts/userContext'
 import { useUserData } from '../data/dataContext'
 import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
+import { ReactKeycloakProvider } from "@react-keycloak/web";
+import keycloak from "../Keycloak";
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -43,9 +44,9 @@ export const UserLoader = ({children}: UserLoaderProps) => {
       return <Unauthenticated/>
     case 'loaded':
       return (
-        <UserContext.Provider value={state.user}>
+        <ReactKeycloakProvider authClient={keycloak}>
           {children}
-        </UserContext.Provider>
+        </ReactKeycloakProvider>
       )
   }
 }

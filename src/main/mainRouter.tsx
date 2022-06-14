@@ -3,13 +3,23 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from '../pages/home/home'
 import { PostPage } from '../pages/postPage/postPage'
 import { UserProfile } from '../pages/userProfile/userProfile'
+import {useKeycloak} from "@react-keycloak/web";
+import keycloak from "../Keycloak";
+
 
 export const MainRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/users/:userId" element={<UserProfile/>}/>
-      <Route path="/posts/:postId" element={<PostPage/>}/>
+      <Route path="/" element={
+              <Home/>
+          }/>
+      <Route path="/users/:userId" element={
+              <UserProfile/>
+          }/>
+      <Route path="/posts/:postId" element={
+              <PostPage/>
+          }/>
+        <Route path={'/login'} element={<button onClick={() => keycloak.login()}> Login </button>}/>
     </Routes>
   )
 }

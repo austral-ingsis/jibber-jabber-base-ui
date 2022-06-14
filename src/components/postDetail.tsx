@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container, Stack } from '@mui/material'
-import { FullPost } from '../data/posts'
+import {Post} from '../data/posts'
 import { SxProps } from '@mui/system'
 import { Theme } from '@mui/material/styles'
 import { PostCard } from './postCard'
 import { CreatePostCard } from './createPostCard'
 
 export type PostCardProps = {
-  post: FullPost
+  post: Post
   onPostAnswer: (postText: string) => void
 }
 
@@ -28,8 +28,8 @@ export const PostDetail = ({post, onPostAnswer}: PostCardProps) => {
       />
 
       <Stack>
-        {post.thread
-          .map(answer => (<PostCard key={answer.id} post={answer} sx={answerStyle}/>))
+        {post.threadAnswers && post.threadAnswers
+          .map((answer: Post) => (<PostCard key={answer.id} post={answer} sx={answerStyle}/>))
         }
       </Stack>
 

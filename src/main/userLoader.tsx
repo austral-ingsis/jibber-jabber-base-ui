@@ -4,8 +4,7 @@ import { Loading } from '../components/loading'
 import { useUserData } from '../data/dataContext'
 import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
-import { ReactKeycloakProvider } from "@react-keycloak/web";
-import keycloak from "../Keycloak";
+import { UserContext } from '../components/contexts/userContext'
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -28,6 +27,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
 
   const [state, setState] = useState<UserLoaderState>({status: 'loading'})
 
+
   useEffect(() => {
     userData.getCurrentUser().then((user) => {
       if (isNotUndefined(user))
@@ -44,9 +44,9 @@ export const UserLoader = ({children}: UserLoaderProps) => {
       return <Unauthenticated/>
     case 'loaded':
       return (
-        <ReactKeycloakProvider authClient={keycloak}>
-          {children}
-        </ReactKeycloakProvider>
+          <UserContext.Provider value={state.user}>
+            {children}
+          </UserContext.Provider>
       )
   }
 }

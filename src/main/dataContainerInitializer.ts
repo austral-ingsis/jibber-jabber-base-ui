@@ -4,6 +4,8 @@ import { User } from '../data/users'
 import { LocalDataStorage } from '../data/localStorage/localDataStorage'
 import { LocalUserData } from '../data/localStorage/localUserData'
 import {Post} from "../data/posts";
+import {userAPI} from "../data/apis/UserAPI";
+import {postAPI} from "../data/apis/PostAPI";
 
 const initialUsers: User[] = [
   {
@@ -62,7 +64,7 @@ export const createDataContainer = (): Promise<DataContainer> => {
     initialUsers.forEach(user => userStorage.setValue(user.id, user))
 
   return Promise.resolve({
-    posts: new LocalPostData(postStorage),
-    users: new LocalUserData(userStorage, initialUsers[0].id),
+    posts: postAPI,
+    users: userAPI,
   })
 }

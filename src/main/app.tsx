@@ -23,9 +23,11 @@ export const App = () => {
     return (
         <ReactKeycloakProvider authClient={keycloak}>
             <DataContext.Provider value={dataContainer}>
-                <BrowserRouter>
-                    <MainRouter/>
-                </BrowserRouter>
+                {/*<UserLoader>*/}
+                    <BrowserRouter>
+                        <MainRouter/>
+                    </BrowserRouter>
+                {/*</UserLoader>*/}
             </DataContext.Provider>
         </ReactKeycloakProvider>
     )

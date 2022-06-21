@@ -6,13 +6,14 @@ import {DataContainer, DataContext} from '../data/dataContext'
 import {MainRouter} from './mainRouter'
 import {createDataContainer} from './dataContainerInitializer'
 import keycloak from "../Keycloak";
-import {ReactKeycloakProvider, useKeycloak} from "@react-keycloak/web";
+import {ReactKeycloakProvider} from "@react-keycloak/web";
 
 
 export const App = () => {
     const [dataContainer, setDataContainer] = useState<DataContainer | undefined>()
 
     useEffect(() => {
+
         createDataContainer()
             .then(container => setDataContainer(container))
     }, [])
@@ -20,8 +21,9 @@ export const App = () => {
     if (dataContainer === undefined)
         return (<div>Loading ...</div>)
 
+
     return (
-        <ReactKeycloakProvider authClient={keycloak}>
+        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.idToken) sessionStorage.setItem("token", token.idToken )}}>
             <DataContext.Provider value={dataContainer}>
                 {/*<UserLoader>*/}
                     <BrowserRouter>

@@ -57,7 +57,29 @@ class UserAPI implements UserData {
 
     getUserById(userId: string): Promise<User | undefined> {
 
-        return Promise.resolve(undefined);
+        try {
+
+            return fetch(`http://localhost:8087/auth/admin/realms/JibberJabber/users/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization' : 'Bearer ' + sessionStorage.getItem("token")
+                }
+            }).then(r => r.json())
+                .then(data => {
+                    console.log(data)
+                    return {
+                        id: data.id,
+                        displayName: data.firstName + " " + data.lastName,
+                        username: data.username
+                    }})
+
+        } catch(err) {
+            console.log(err)
+
+            return this.getCurrentUser()
+        }
+
+
 
     }
 

@@ -28,7 +28,6 @@ export const Home = () => {
 
   useEffect(() => {
 
-
         postData.getFeedPosts().then(posts => {
         setState({loaded: true, posts})
       })
@@ -43,7 +42,7 @@ export const Home = () => {
 
   const handleCreatePost = useCallback((postText: string) => {
     if (state.loaded)
-      postData.createPost({author: user.username, content: postText})
+      postData.createPost({author: user.id, content: postText})
         .then(() => refreshPosts())
         .catch(error => console.error('Error while creating new post', error))
   }, [state, postData])

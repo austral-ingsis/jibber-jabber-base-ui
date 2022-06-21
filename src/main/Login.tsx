@@ -23,8 +23,6 @@ export const Login = () => {
 
     useEffect(() => {
 
-        console.log(keycloak.tokenParsed)
-
         if(keycloak.authenticated) {
 
             const kc = keycloak.tokenParsed

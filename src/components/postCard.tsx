@@ -28,12 +28,23 @@ export const PostCard = ({post, sx, shouldNavigate = false}: PostCardProps) => {
   const mergedCardStyle = {...cardStyle, ...sx}
 
   useEffect(() => {
-    userData.getCurrentUser().then(r => {
+
+    userData.getUserById(author).then(r => {
       if(r) {
         setusername(r.username)
         setDisplayName(r.displayName)
+        console.log(r)
       }
+
     })
+
+    // userData.getCurrentUser().then(r => {
+    //   console.log(r)
+    //   if(r) {
+    //     setusername(r.username)
+    //     setDisplayName(r.displayName)
+    //   }
+    // })
   })
 
   const handleContentClick = useCallback(() => {

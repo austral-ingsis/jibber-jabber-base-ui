@@ -8,11 +8,7 @@ export const useUserContext = () => {
 
     const kc = keycloak.tokenParsed
 
-    console.log(kc)
-
     const u = sessionStorage.getItem("user")
-
-    console.log(u)
 
 
     if(kc?.sub) {
@@ -27,6 +23,7 @@ export const useUserContext = () => {
 
         }
 
+        if(keycloak.token) sessionStorage.setItem("token", keycloak.token)
         sessionStorage.setItem("user", JSON.stringify(user))
 
         return useContext(createContext<User>(user))

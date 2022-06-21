@@ -66,7 +66,7 @@ class UserAPI implements UserData {
                 }
             }).then(r => r.json())
                 .then(data => {
-                    console.log(data)
+
                     return {
                         id: data.id,
                         displayName: data.firstName + " " + data.lastName,
@@ -85,13 +85,42 @@ class UserAPI implements UserData {
 
     isFollowed(userId: string): Promise<boolean | undefined> {
 
-        return Promise.resolve(undefined);
+        const u = sessionStorage.getItem("user")
 
+        return fetch(`${apiURL}/getIsFollowing`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            body: JSON.stringify({
+                followerUserId: u? JSON.parse(u).userId : "",
+                followedUserId: userId
+            }
+            )
+        }).then(r => r.json()).then(data => {
+            console.log(data)
+            return data
+        })
     }
 
     toggleFollow(userId: string): Promise<void> {
 
-        return Promise.resolve(undefined);
+        const u = sessionStorage.getItem("user")
+
+        return fetch(`${apiURL}/toggleFollow`, {
+            method: 'GET',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+            },
+            body: JSON.stringify({
+                followerUserId: u? JSON.parse(u).userId : "",
+                followedUserId: userId
+            })
+        }).then(r => r.json())
 
     }
 

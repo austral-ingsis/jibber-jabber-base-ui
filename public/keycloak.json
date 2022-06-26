@@ -1,1 +1,8 @@
-
+{
+  "realm": "JibberJabber",
+  "auth-server-url": "https://www.example.com/auth/",
+  "ssl-required": "external",
+  "resource": "JibberJabber-frontend",
+  "public-client": true,
+  "confidential-port": 0
+}

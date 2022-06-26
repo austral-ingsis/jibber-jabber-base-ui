@@ -76,6 +76,9 @@ class PostAPI implements PostData {
                 'Access-Control-Allow-Origin': '*',
             }
         }).then(r => r.json())
+            .then(data => {
+                return data.content
+        })
 
     }
 

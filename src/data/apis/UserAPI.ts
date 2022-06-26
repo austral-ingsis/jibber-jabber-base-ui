@@ -1,5 +1,8 @@
 import {User, UserData} from "../users";
 import keycloak from "../../Keycloak";
+import {Javascript} from "@mui/icons-material";
+import {tablePaginationClasses} from "@mui/material";
+import {isDOMComponent} from "react-dom/test-utils";
 
 const apiURL = "http://localhost:8080/follows"
 
@@ -57,15 +60,21 @@ class UserAPI implements UserData {
 
     getUserById(userId: string): Promise<User | undefined> {
 
+        let token
+
+        if(keycloak.token) token = keycloak.token
+        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
+
         try {
 
             return fetch(`http://localhost:8087/auth/admin/realms/JibberJabber/users/${userId}`, {
                 method: 'GET',
                 headers: {
-                    'Authorization' : 'Bearer ' + sessionStorage.getItem("token")
+                    'Authorization' : 'Bearer ' + token
                 }
             }).then(r => r.json())
                 .then(data => {
+
 
                     return {
                         id: data.id,
@@ -87,37 +96,102 @@ class UserAPI implements UserData {
 
         const u = sessionStorage.getItem("user")
 
-        return fetch(`${apiURL}/getIsFollowing`, {
+        return fetch(`${apiURL}/getFollowers/${userId}`, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-            },
-            body: JSON.stringify({
-                followerUserId: u? JSON.parse(u).userId : "",
-                followedUserId: userId
             }
-            )
-        }).then(r => r.json()).then(data => {
-            console.log(data)
-            return data
+        }).then(res => res.json()).then(data => {
+
+            for (let i = 0; i < data.content.length; i++) {
+                if(u && data.content[i] === JSON.parse(u).id) return true
+            }
+
+            return false
+
+            // if(u) {
+            //
+            //     data.content.forEach((f: string) => {
+            //
+            //         console.log(f)
+            //         console.log(JSON.parse(u).id)
+            //         console.log(f === JSON.parse(u).id)
+            //
+            //         if (f === JSON.parse(u).id) return Promise.resolve(true)
+            //
+            //     })
+            //
+            //     return Promise.resolve(false)
+            //
+            // } else return Promise.resolve(false)
+
         })
     }
 
-    toggleFollow(userId: string): Promise<void> {
+
+
+        // return Promise.resolve(true)
+
+
+        // const u = sessionStorage.getItem("user")
+        //
+        // return fetch(`${apiURL}/getIsFollowing`, {
+        //     method: 'GET',
+        //     credentials: 'same-origin',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*',
+        //     },
+        //     body: JSON.stringify({
+        //         followerUserId: u? JSON.parse(u).userId : "",
+        //         followedUserId: userId
+        //     }
+        //     )
+        // }).then(r => r.json()).then(data => {
+        //     console.log(data)
+        //     return data
+        // })
+
+
+    toggleFollow(userId: string, isFollowed: boolean): Promise<void> {
 
         const u = sessionStorage.getItem("user")
 
+        const kc = keycloak.tokenParsed
+
+        let uID
+
+        if(kc?.sub) uID = kc.sub
+        else if(u) uID = JSON.parse(u).id
+
+        const requestURL = isFollowed ? 'unfollowUser' : 'followUser'
+
+
+        // return fetch(`${apiURL}/${requestURL}`, {
+        //     method: 'POST',
+        //     credentials: 'same-origin',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Access-Control-Allow-Origin': '*',
+        //     },
+        //     body: JSON.stringify({
+        //         followerUserId: userId,
+        //         followedUserId: u? JSON.parse(u).id : ""
+        //     })
+        // }).then(r => r.json()).then(data => data.content)
+
+
         return fetch(`${apiURL}/toggleFollow`, {
-            method: 'GET',
+            method: 'POST',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify({
-                followerUserId: u? JSON.parse(u).userId : "",
+                followerUserId: uID,
                 followedUserId: userId
             })
         }).then(r => r.json())
@@ -133,7 +207,7 @@ class UserAPI implements UserData {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
             }
-        }).then(res => res.json())
+        }).then(res => res.json()).then(data => data.userId)
 
     }
 

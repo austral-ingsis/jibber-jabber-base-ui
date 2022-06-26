@@ -12,6 +12,6 @@ export interface UserData {
 
   isFollowed(userId: string): Promise<boolean | undefined>
 
-  toggleFollow(userId: string): Promise<void>
+  toggleFollow(userId: string, isFollowed: boolean): Promise<void>
 
 }

@@ -1,30 +1,44 @@
 import * as React from 'react'
-import { useEffect, useState } from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import {BrowserRouter} from 'react-router-dom'
 
-import { DataContainer, DataContext } from '../data/dataContext'
-import { MainRouter } from './mainRouter'
-import { createDataContainer } from './dataContainerInitializer'
-import { UserLoader } from './userLoader'
+import {DataContainer, DataContext} from '../data/dataContext'
+import {MainRouter} from './mainRouter'
+import {createDataContainer} from './dataContainerInitializer'
+import keycloak from "../Keycloak";
+import {ReactKeycloakProvider} from "@react-keycloak/web";
+import {postAPI} from "../data/apis/PostAPI";
+import {userAPI} from "../data/apis/UserAPI";
+
 
 export const App = () => {
-  const [dataContainer, setDataContainer] = useState<DataContainer | undefined>()
+    // const [dataContainer, setDataContainer] = useState<DataContainer>()
 
-  useEffect(() => {
-    createDataContainer()
-      .then(container => setDataContainer(container))
-  }, [])
+    const dataContainer = {
+        posts: postAPI,
+        users: userAPI
+    }
 
-  if (dataContainer === undefined)
-    return (<div>Loading ...</div>)
+    useEffect(() => {
 
-  return (
-    <DataContext.Provider value={dataContainer}>
-      <BrowserRouter>
-        <UserLoader>
-          <MainRouter/>
-        </UserLoader>
-      </BrowserRouter>
-    </DataContext.Provider>
-  )
+        // createDataContainer()
+        //     .then(container => setDataContainer(container))
+
+    }, [])
+    //
+    // if (dataContainer === undefined)
+    //     return (<div>Loading ...</div>)
+    //
+
+    return (
+        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.idToken) sessionStorage.setItem("token", token.idToken )}}>
+            <DataContext.Provider value={dataContainer}>
+                {/*<UserLoader>*/}
+                    <BrowserRouter>
+                        <MainRouter/>
+                    </BrowserRouter>
+                {/*</UserLoader>*/}
+            </DataContext.Provider>
+        </ReactKeycloakProvider>
+    )
 }

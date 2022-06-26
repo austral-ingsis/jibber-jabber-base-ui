@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react'
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, TextField } from '@mui/material'
+import { Button, Card, CardActions, CardContent, CardHeader, TextField } from '@mui/material'
 import { SxProps } from '@mui/system'
 import { Theme } from '@mui/material/styles'
 import { useUserContext } from './contexts/userContext'
@@ -20,7 +20,7 @@ const inputStyle: SxProps<Theme> = {
 }
 
 export const CreatePostCard = ({onPost, buttonMessage, placeholder, sx}: CreatePostCardProps) => {
-  const {displayName, username, avatar} = useUserContext()
+  const {displayName, username} = useUserContext()
 
   const [postText, setPostText] = useState('')
 
@@ -40,7 +40,7 @@ export const CreatePostCard = ({onPost, buttonMessage, placeholder, sx}: CreateP
   return (
     <Card sx={fullCardStyle}>
       <CardHeader
-        avatar={<Avatar src={avatar}/>}
+        // avatar={<Avatar src={avatar}/>}
         title={displayName}
         subheader={`@${username}`}
       />

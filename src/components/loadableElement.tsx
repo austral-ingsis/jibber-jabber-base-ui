@@ -10,6 +10,7 @@ export type LoadableElementProps<E> = {
 }
 
 export const LoadableElement = <E extends unknown>({state, renderValue}: LoadableElementProps<E>) => {
+
   switch (state.status) {
     case 'loading':
       return <Loading/>

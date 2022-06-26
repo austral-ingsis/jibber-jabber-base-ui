@@ -12,6 +12,7 @@ export const FollowActions = ({userId, isFollowed, onToggle}: FollowActionsProps
 
   return (
     <FormGroup>
+        <h3> {isFollowed ? "followed" : "not followed"} </h3>
       <FormControlLabel
         control={<Switch sx={{m: 1}} defaultChecked/>}
         label={isFollowed ? 'Following' : 'Not following'}

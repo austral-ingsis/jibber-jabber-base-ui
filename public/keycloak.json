@@ -1,5 +1,5 @@
 {
-  "realm": "Jibber-Jabber",
+  "realm": "JibberJabber",
   "auth-server-url": "https://jibberjabberg2.ml/auth/",
   "ssl-required": "external",
   "resource": "jibber-jabber-ui",

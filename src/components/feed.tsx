@@ -10,11 +10,23 @@ export type FeedProps = {
 }
 
 export const Feed = ({posts}: FeedProps) => {
-  return (
-    <Stack>
-      {posts
-        .map(post => <PostCard key={post.id} post={post} shouldNavigate/>)
-      }
-    </Stack>
-  )
+
+  if (posts.length > 0) {
+
+    return (
+        <Stack>
+          {posts.map(post => <PostCard key={post.id} post={post} shouldNavigate/>)
+          }
+        </Stack>
+    )
+
+  } else {
+
+    return (
+        <h3> So sorry... there arent any posts to see!</h3>
+    )
+
+  }
+
+
 }

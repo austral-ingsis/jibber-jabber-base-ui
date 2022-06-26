@@ -1,10 +1,10 @@
 import React, { ReactNode, useEffect, useState } from 'react'
 import { User } from '../data/users'
 import { Loading } from '../components/loading'
-import { UserContext } from '../components/contexts/userContext'
 import { useUserData } from '../data/dataContext'
 import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
+import { UserContext } from '../components/contexts/userContext'
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -27,6 +27,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
 
   const [state, setState] = useState<UserLoaderState>({status: 'loading'})
 
+
   useEffect(() => {
     userData.getCurrentUser().then((user) => {
       if (isNotUndefined(user))
@@ -43,9 +44,9 @@ export const UserLoader = ({children}: UserLoaderProps) => {
       return <Unauthenticated/>
     case 'loaded':
       return (
-        <UserContext.Provider value={state.user}>
-          {children}
-        </UserContext.Provider>
+          <UserContext.Provider value={state.user}>
+            {children}
+          </UserContext.Provider>
       )
   }
 }

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import { FullPost } from '../../data/posts'
+import { Post } from '../../data/posts'
 import { usePostData } from '../../data/dataContext'
 import { useParams } from 'react-router-dom'
 import { PostDetail } from '../../components/postDetail'
@@ -19,17 +19,17 @@ export const PostPage = () => {
   const postData = usePostData()
   const getFullPostById = useCallback(postData.getFullPostById.bind(postData), [postData])
 
-  const {state, load} = useLoadElementById<FullPost>(postId, getFullPostById)
+  const {state, load} = useLoadElementById<Post>(postId, getFullPostById)
 
   const handlePostAnswer = useCallback((postText: string) => {
     if (state.status === 'loaded') {
-      postData.answerPost(state.value.id, {user, text: postText})
+      postData.answerPost(state.value.id, {author: user.id, content: postText})
         .then(() => load())
         .catch(error => console.error('Error while creating new post', error))
     }
   }, [state, postData])
 
-  const renderPost = useCallback((post: FullPost) => (
+  const renderPost = useCallback((post: Post) => (
     <PostDetail post={post} onPostAnswer={handlePostAnswer}/>
   ), [handlePostAnswer])
 

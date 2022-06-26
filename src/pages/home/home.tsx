@@ -5,9 +5,11 @@ import { Feed } from '../../components/feed'
 import { usePostData } from '../../data/dataContext'
 import { Loading } from '../../components/loading'
 import { MainFrame } from '../../components/mainFrame'
-import { UserContext } from '../../components/contexts/userContext'
+import {UserContext, useUserContext} from '../../components/contexts/userContext'
 import { CreatePostCard } from '../../components/createPostCard'
 import { Container } from '@mui/material'
+import keycloak from "../../Keycloak";
+import {userAPI} from "../../data/apis/UserAPI";
 
 type HomeState =
   | {
@@ -20,14 +22,17 @@ type HomeState =
 
 export const Home = () => {
   const postData = usePostData()
-  const user = useContext(UserContext)
+  const user = useUserContext()
 
   const [state, setState] = useState<HomeState>({loaded: false})
 
   useEffect(() => {
-    postData.getFeedPosts().then(posts => {
-      setState({loaded: true, posts})
-    })
+
+        postData.getFeedPosts().then(posts => {
+        setState({loaded: true, posts})
+      })
+
+
   }, [postData])
 
   const refreshPosts = useCallback(() => {
@@ -37,7 +42,7 @@ export const Home = () => {
 
   const handleCreatePost = useCallback((postText: string) => {
     if (state.loaded)
-      postData.createPost({user, text: postText})
+      postData.createPost({author: user.id, content: postText})
         .then(() => refreshPosts())
         .catch(error => console.error('Error while creating new post', error))
   }, [state, postData])
@@ -55,5 +60,6 @@ export const Home = () => {
         <Feed posts={posts}/>
       </Container>
     </MainFrame>
+
   )
 }

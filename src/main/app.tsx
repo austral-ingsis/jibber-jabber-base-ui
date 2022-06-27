@@ -9,6 +9,7 @@ import keycloak from "../Keycloak";
 import {ReactKeycloakProvider} from "@react-keycloak/web";
 import {postAPI} from "../data/apis/PostAPI";
 import {userAPI} from "../data/apis/UserAPI";
+import {UserLoader} from "./userLoader";
 
 
 export const App = () => {
@@ -31,13 +32,13 @@ export const App = () => {
     //
 
     return (
-        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.idToken) sessionStorage.setItem("token", token.idToken )}}>
+        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.token) sessionStorage.setItem("token", token.token )}}>
             <DataContext.Provider value={dataContainer}>
                 {/*<UserLoader>*/}
                     <BrowserRouter>
                         <MainRouter/>
                     </BrowserRouter>
-                {/*</UserLoader>*/}
+                {/*</UserLoa der>*/}
             </DataContext.Provider>
         </ReactKeycloakProvider>
     )

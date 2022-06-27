@@ -18,7 +18,7 @@ class PostAPI implements PostData {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
                 'Authorization' : 'Bearer ' + token
             },
             body: JSON.stringify(answer)
@@ -39,7 +39,7 @@ class PostAPI implements PostData {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
                 'Authorization' : 'Bearer ' + token
             },
             body: JSON.stringify(post)
@@ -62,7 +62,7 @@ class PostAPI implements PostData {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
                 'Authorization' : 'Bearer ' + token
             }
         }).then(res => {
@@ -88,7 +88,7 @@ class PostAPI implements PostData {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
                 'Authorization' : 'Bearer ' + token
             }
         }).then(r => r.json())
@@ -108,7 +108,7 @@ class PostAPI implements PostData {
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Origin': '*',
                 'Authorization' : 'Bearer ' + token
             }
         }).then(r => r.json())

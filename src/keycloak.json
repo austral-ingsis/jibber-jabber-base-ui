@@ -1,6 +1,7 @@
 {
   "realm": "JibberJabber",
-  "auth-server-url": "https://www.example.com/auth/",
+  "auth-server-url": "https://localhost:8087/auth/",
+  "clientId": "JibberJabber-frontend",
   "ssl-required": "external",
   "resource": "JibberJabber-frontend",
   "public-client": true,

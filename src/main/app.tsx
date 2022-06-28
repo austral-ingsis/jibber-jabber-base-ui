@@ -31,13 +31,13 @@ export const App = () => {
     //
 
     return (
-        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.idToken) sessionStorage.setItem("token", token.idToken )}}>
+        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.token) sessionStorage.setItem("token", token.token )}}>
             <DataContext.Provider value={dataContainer}>
                 {/*<UserLoader>*/}
                     <BrowserRouter>
                         <MainRouter/>
                     </BrowserRouter>
-                {/*</UserLoader>*/}
+                {/*</UserLoa der>*/}
             </DataContext.Provider>
         </ReactKeycloakProvider>
     )

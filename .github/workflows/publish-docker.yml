@@ -79,15 +79,15 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-      - name: Update server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DEV_IP }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.DEV_KEY }}
-          script: |
-            cd Backend
-            sudo docker-compose stop
-            sudo docker-compose pull
-            sudo docker-compose up --detach
+#       - name: Update server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.DEV_IP }}
+#           username: ${{ secrets.USERNAME }}
+#           key: ${{ secrets.DEV_KEY }}
+#           script: |
+#             cd Backend
+#             sudo docker-compose stop
+#             sudo docker-compose pull
+#             sudo docker-compose up --detach
 

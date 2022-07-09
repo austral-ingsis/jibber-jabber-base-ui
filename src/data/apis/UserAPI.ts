@@ -4,7 +4,7 @@ import {Javascript} from "@mui/icons-material";
 import {tablePaginationClasses} from "@mui/material";
 import {isDOMComponent} from "react-dom/test-utils";
 
-const apiURL = "http://localhost:8080/follows"
+const apiURL = "https://jbbrjbbr2202.store/follows"
 
 
 class UserAPI implements UserData {
@@ -67,7 +67,7 @@ class UserAPI implements UserData {
 
         try {
 
-            return fetch(`http://localhost:8087/auth/admin/realms/JibberJabber/users/${userId}`, {
+            return fetch(`https://jbbrjbbr2202.store/auth/admin/realms/JibberJabber/users/${userId}`, {
                 method: 'GET',
                 headers: {
                     'Authorization' : 'Bearer ' + token

@@ -1,7 +1,7 @@
 import {NewPost, Post, PostData} from "../posts";
 import keycloak from "../../Keycloak";
 
-const apiURL = "http://localhost:8083/posts"
+const apiURL = "https://jbbrjbbr2202.store/posts"
 
 class PostAPI implements PostData {
 

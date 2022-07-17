@@ -4,7 +4,7 @@ import Keycloak from "keycloak-js";
 
 
 const keycloak = new Keycloak({
-    url: "http://jbbrjbbr2202.store/auth",
+    url: "https://jbbrjbbr2202.store/auth",
     realm: "JibberJabber",
     clientId: "JibberJabber-frontend"
 });

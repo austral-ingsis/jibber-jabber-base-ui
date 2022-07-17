@@ -1,11 +1,16 @@
 import {User, UserData} from "../users";
-import keycloak from "../../Keycloak";
-import {Javascript} from "@mui/icons-material";
-import {tablePaginationClasses} from "@mui/material";
-import {isDOMComponent} from "react-dom/test-utils";
+import axios from "axios";
+import _kc from "../../main/Keycloak";
+
 
 const apiURL = "https://jbbrjbbr2202.store/follows"
 
+const followAxios = axios.create({
+    baseURL: "https://jbbrjbbr2202.store/follows",
+    headers: {
+        "Content-type": "application/json"
+    }
+})
 
 class UserAPI implements UserData {
 
@@ -35,7 +40,7 @@ class UserAPI implements UserData {
 
         }
 
-        const kc = keycloak.tokenParsed
+        const kc = _kc.tokenParsed
 
         if(kc?.sub) {
 
@@ -62,7 +67,7 @@ class UserAPI implements UserData {
 
         let token
 
-        if(keycloak.token) token = keycloak.token
+        if(_kc.token) token = _kc.token
         else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
 
         try {
@@ -96,12 +101,19 @@ class UserAPI implements UserData {
 
         const u = sessionStorage.getItem("user")
 
+        let token
+
+        if(_kc.token) token = _kc.token
+        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
+
+
         return fetch(`${apiURL}/getFollowers/${userId}`, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Authorization' : 'Bearer ' + token
             }
         }).then(res => res.json()).then(data => {
 
@@ -159,11 +171,15 @@ class UserAPI implements UserData {
 
         const u = sessionStorage.getItem("user")
 
-        const kc = keycloak.tokenParsed
+        let token
+
+        if(_kc.token) token = _kc.token
+        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
+
 
         let uID
 
-        if(kc?.sub) uID = kc.sub
+        if(token?.sub) uID = token.sub
         else if(u) uID = JSON.parse(u).id
 
         const requestURL = isFollowed ? 'unfollowUser' : 'followUser'
@@ -189,6 +205,7 @@ class UserAPI implements UserData {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Authorization' : 'Bearer ' + token
             },
             body: JSON.stringify({
                 followerUserId: uID,
@@ -200,12 +217,19 @@ class UserAPI implements UserData {
 
     getFollowing(id: string): Promise<string[]> {
 
+        let token
+
+        if(_kc.token) token = _kc.token
+        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
+
+
         return fetch(`${apiURL}/getFollowing/${id}`, {
             method: 'GET',
             credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
+                'Authorization' : 'Bearer ' + token
             }
         }).then(res => res.json()).then(data => data.userId)
 

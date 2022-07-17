@@ -1,6 +1,6 @@
 import { User } from '../../data/users'
 import { createContext, useContext } from 'react'
-import keycloak from "../../Keycloak";
+import keycloak from "../../main/Keycloak";
 
 export const UserContext = createContext<User>(undefined as unknown as User)
 

@@ -1,7 +1,6 @@
 {
   "realm": "JibberJabber",
   "auth-server-url": "https://jbbrjbbr2202.store/auth/",
-  "clientId": "JibberJabber-frontend",
   "ssl-required": "external",
   "resource": "JibberJabber-frontend",
   "public-client": true,

@@ -54,14 +54,14 @@ const initialPosts: Post[] = [
 
 export const createDataContainer = (): Promise<DataContainer> => {
 
-  // const postStorage = postAPI
-  //
-  // if (postStorage.().length === 0)
-  //   initialPosts.forEach(post => postStorage.setValue(post.id, post))
-  //
-  // const userStorage = new LocalDataStorage<User>(LocalUserData.type)
-  // if (userStorage.getAll().length === 0)
-  //   initialUsers.forEach(user => userStorage.setValue(user.id, user))
+  const postStorage = new LocalDataStorage<Post>(LocalPostData.type)
+
+  if (postStorage.getAll().length === 0)
+    initialPosts.forEach(post => postStorage.setValue(post.id, post))
+
+  const userStorage = new LocalDataStorage<User>(LocalUserData.type)
+  if (userStorage.getAll().length === 0)
+    initialUsers.forEach(user => userStorage.setValue(user.id, user))
 
   return Promise.resolve({
     posts: postAPI,

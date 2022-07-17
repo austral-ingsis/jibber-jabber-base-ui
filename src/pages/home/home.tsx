@@ -8,7 +8,7 @@ import { MainFrame } from '../../components/mainFrame'
 import {UserContext, useUserContext} from '../../components/contexts/userContext'
 import { CreatePostCard } from '../../components/createPostCard'
 import { Container } from '@mui/material'
-import keycloak from "../../Keycloak";
+import keycloak from "../../main/Keycloak";
 import {userAPI} from "../../data/apis/UserAPI";
 
 type HomeState =

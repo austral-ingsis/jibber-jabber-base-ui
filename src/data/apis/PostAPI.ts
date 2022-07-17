@@ -1,123 +1,61 @@
 import {NewPost, Post, PostData} from "../posts";
-import keycloak from "../../Keycloak";
+import axios from "axios";
+import UserService from "../../utils/userService";
+import _kc from "../../main/Keycloak";
 
-const apiURL = "https://jbbrjbbr2202.store/posts"
+
+const jjAxios = axios.create({
+    baseURL: "https://jbbrjbbr2202.store/posts",
+    headers: {
+        "Content-type": "application/json"
+    }
+})
 
 class PostAPI implements PostData {
 
     answerPost(postId: string, answer: NewPost): Promise<Post> {
 
-        let token
-
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
-
-
-        return fetch(`${apiURL}/answerPost/${postId}`, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                'Authorization' : 'Bearer ' + token
-            },
-            body: JSON.stringify(answer)
-        }).then(r => (r.json()))
+        return jjAxios.post<NewPost, Post>(`/answerPost/${postId}`, answer)
 
     }
 
     createPost(post: NewPost): Promise<Post> {
 
-        let token
-
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
-
-
-        return fetch(`${apiURL}/addPost`, {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                'Authorization' : 'Bearer ' + token
-            },
-            body: JSON.stringify(post)
-        }).then(r => r.json())
+        return jjAxios.post<NewPost, Post>("/addPost", post)
 
     }
 
-
-
     getFeedPosts(): Promise<Post[]> {
 
-        let token
+        console.log(UserService.getToken())
 
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
-
-
-        return fetch(`${apiURL}/getAllPosts/`, {
-            method: 'GET',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                'Authorization' : 'Bearer ' + token
-            }
-        }).then(res => {
-
-            return res.json()
-        }).then(data => {
-
-            return data.content
-        })
+        return jjAxios.get('/getAllPosts').then(response => response.data.content)
 
     }
 
     getFullPostById(id: string): Promise<Post | undefined> {
 
-        let token
-
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
-
-
-        return fetch(`${apiURL}/getPost/${id}`, {
-            method: 'GET',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                'Authorization' : 'Bearer ' + token
-            }
-        }).then(r => r.json())
+        return jjAxios.get(`/getPost/${id}`).then(response => response.data.content)
 
     }
 
     getPostsByUser(userId: string): Promise<Post[]> {
 
-        let token
-
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
-
-
-        return fetch(`${apiURL}/getUserPosts/${userId}`, {
-            method: 'GET',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Access-Control-Allow-Origin': '*',
-                'Authorization' : 'Bearer ' + token
-            }
-        }).then(r => r.json())
-            .then(data => {
-                return data.content
-        })
+        return jjAxios.get(`/getUserPosts/${userId}`)
 
     }
 
 }
+
+jjAxios.interceptors.request.use((config) => {
+    if (UserService.isLoggedIn()) {
+        const cb = () => {
+            // @ts-ignore
+            config.headers.Authorization = `Bearer ${UserService.getToken()}`;
+            return Promise.resolve(config);
+        };
+        return UserService.updateToken(cb);
+    }
+});
 
 export const postAPI = new PostAPI()

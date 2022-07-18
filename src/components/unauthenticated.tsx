@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import keycloak from "../Keycloak";
-import {useNavigate} from "react-router-dom";
+// import {useNavigate} from "react-router-dom";
 
 export const Unauthenticated = () => {
 
     const [tries, setTries] = useState(0)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
 
     useEffect(() => {
@@ -14,7 +14,7 @@ export const Unauthenticated = () => {
                     redirectUri: 'https://jbbrjbbr2202.store/',
                 }).then((r) => {
                     console.log(r)
-                    navigate("/")
+                    // navigate("/")
                 })
             }catch (e) {
                 console.log(e)

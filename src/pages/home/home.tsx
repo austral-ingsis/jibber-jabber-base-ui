@@ -26,12 +26,16 @@ export const Home = () => {
 
   const [state, setState] = useState<HomeState>({loaded: false})
 
+  const [load, setLoad] = useState(true)
+
   useEffect(() => {
 
+      if(load){
         postData.getFeedPosts().then(posts => {
         setState({loaded: true, posts})
-      })
-
+        setLoad(false)
+        })
+      }
 
   }, [postData])
 

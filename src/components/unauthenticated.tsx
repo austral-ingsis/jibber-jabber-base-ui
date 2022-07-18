@@ -6,13 +6,15 @@ export const Unauthenticated = () => {
 
 
     useEffect(() => {
-        if(isNotUndefined(keycloak)){
+        try {
             keycloak.login({
-                redirectUri:  'https://jbbrjbbr2202.store/',
+                redirectUri: 'https://jbbrjbbr2202.store/',
             })
+        }catch (e) {
+            console.log(e)
         }
 
-    }, [keycloak])
+    }, [])
 
     if(keycloak === undefined){
         return(<div>Keycloak loading...</div>)

@@ -7,7 +7,6 @@ const keycloak = new Keycloak({
     url: "https://jbbrjbbr2202.store/auth/",
     realm: "JibberJabber",
     clientId: "JibberJabber-frontend",
-    onLoad: "login-required"
     // sslRequired: "external",
     // resource: "JibberJabber-frontend",
     // public-client: true,

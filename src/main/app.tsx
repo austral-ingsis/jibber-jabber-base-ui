@@ -31,7 +31,9 @@ export const App = () => {
     //
 
     return (
-        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {if(token.token) sessionStorage.setItem("token", token.token )}}>
+        <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {
+            console.log(token.token)
+            if(token.token) sessionStorage.setItem("token", token.token )}}>
             <DataContext.Provider value={dataContainer}>
                 {/*<UserLoader>*/}
                     <BrowserRouter>

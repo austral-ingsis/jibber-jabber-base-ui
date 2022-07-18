@@ -51,8 +51,7 @@ class PostAPI implements PostData {
 
     getFeedPosts(): Promise<Post[]> {
 
-        console.log(keycloak.token)
-        keycloak.loadUserInfo().then(r => console.log(r))
+        console.log(keycloak)
 
         let token
 

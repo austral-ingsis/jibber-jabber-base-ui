@@ -6,9 +6,14 @@ export const UserContext = createContext<User>(undefined as unknown as User)
 
 export const useUserContext = () => {
 
+    console.log('tokenparsed: ' + keycloak.tokenParsed)
+
+
     const kc = keycloak.tokenParsed
 
     const u = sessionStorage.getItem("user")
+
+    console.log('session: '+u)
 
 
     if(kc?.sub) {

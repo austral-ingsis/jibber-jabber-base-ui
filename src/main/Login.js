@@ -11,15 +11,13 @@ export const Login = () => {
 
     const redirect = () => {
 
-        keycloak.login()
+        keycloak.login( {
+            redirectUri:  'https://jbbrjbbr2202.store/home',
 
-        // keycloak.login( {
-        //     // redirectUri:  'https://jbbrjbbr2202.store/home',
-        //
-        // } ).then(() => {
-        //     if(keycloak.tokenParsed) sessionStorage.setItem("tokenParsed", JSON.stringify(keycloak.tokenParsed))
-        //     navigate('/home')
-        // })
+        } ).then(() => {
+            if(keycloak.tokenParsed) sessionStorage.setItem("tokenParsed", JSON.stringify(keycloak.tokenParsed))
+            // navigate('/home')
+        })
 
     }
 
@@ -34,7 +32,7 @@ export const Login = () => {
 
                 if (kc?.sub) {
 
-                    const user: User = {
+                    const user = {
 
                         id: kc.sub,
                         displayName: kc?.given_name + " " + kc?.family_name,

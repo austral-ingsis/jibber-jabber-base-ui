@@ -4,6 +4,7 @@
   "clientId": "JibberJabber-frontend",
   "ssl-required": "external",
   "resource": "JibberJabber-frontend",
+  "on-load": "login-required",
   "public-client": true,
   "confidential-port": 0
 }

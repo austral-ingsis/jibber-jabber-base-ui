@@ -6,7 +6,7 @@ export const Unauthenticated = () => {
 
     useEffect(() => {
             keycloak.login({
-                // redirectUri:  'https://jbbrjbbr2202.store/',
+                redirectUri:  'https://jbbrjbbr2202.store/',
             })
         }, [])
 

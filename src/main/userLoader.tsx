@@ -6,6 +6,7 @@ import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
 import { UserContext } from '../components/contexts/userContext'
 import keycloak from "../Keycloak";
+import {Login} from "./Login";
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -32,7 +33,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
 
   useEffect(() => {
     userData.getCurrentUser().then((user) => {
-      if (isNotUndefined(user) && isNotUndefined(keycloak))
+      if (isNotUndefined(user))
         setState({status: 'loaded', user})
       else
         setState({status: 'unauthenticated'})

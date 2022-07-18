@@ -12,6 +12,7 @@ export const MainRouter = () => {
 
   return (
     <Routes>
+        <Route path={'/home'} element={<Home/>}/>
         <Route path="/users/:userId" element={ <UserProfile/> }/>
         <Route path="/posts/:postId" element={ <PostPage/> }/>
         <Route path={'/*'} element={<Home/>}/>

@@ -10,16 +10,15 @@ export const Unauthenticated = () => {
 
 
     useEffect(() => {
-            try {
-                keycloak.login({
-                    redirectUri: 'https://jbbrjbbr2202.store/',
-                })
-            }catch (e) {
-                // console.log(e)
-                // setTries(tries+1)
-                // console.log(tries)
-            }
-
+            // try {
+            //     keycloak.login({
+            //         redirectUri: 'https://jbbrjbbr2202.store/',
+            //     })
+            // }catch (e) {
+            //     // console.log(e)
+            //     // setTries(tries+1)
+            //     // console.log(tries)
+            // }
 
     }, [])
 

@@ -5,6 +5,7 @@ import { useUserData } from '../data/dataContext'
 import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
 import { UserContext } from '../components/contexts/userContext'
+import keycloak from "../Keycloak";
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -41,6 +42,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
     case 'loading':
       return <Loading/>
     case 'unauthenticated':
+      keycloak.login()
       return <Unauthenticated/>
     case 'loaded':
       return (

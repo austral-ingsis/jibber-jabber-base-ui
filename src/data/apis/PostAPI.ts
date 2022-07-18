@@ -34,7 +34,7 @@ class PostAPI implements PostData {
         else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
 
 
-        return fetch(`${apiURL}/addPost`, {
+        return fetch(`${apiURL}/addPost/`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {

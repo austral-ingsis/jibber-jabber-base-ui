@@ -32,8 +32,13 @@ export const App = () => {
     //     return (<div>Loading ...</div>)
     //
 
+    if(keycloak === undefined){
+        return(<div>Keycloak loading...</div>)
+    }
+
     return (
         <ReactKeycloakProvider authClient={keycloak} onTokens={(token) => {
+
             console.log(token.token)
             if(token.token) sessionStorage.setItem("token", token.token )
             console.log(keycloak.tokenParsed)

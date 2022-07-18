@@ -38,6 +38,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
       else
         setState({status: 'unauthenticated'})
 
+
     })
   }, [])
 

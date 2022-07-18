@@ -10,6 +10,7 @@ import {ReactKeycloakProvider} from "@react-keycloak/web";
 import {postAPI} from "../data/apis/PostAPI";
 import {userAPI} from "../data/apis/UserAPI";
 import {User} from "../data/users";
+import {UserLoader} from "./userLoader";
 
 
 export const App = () => {
@@ -53,11 +54,11 @@ export const App = () => {
 
         }}>
             <DataContext.Provider value={dataContainer}>
-                {/*<UserLoader>*/}
+                <UserLoader>
                     <BrowserRouter>
                         <MainRouter/>
                     </BrowserRouter>
-                {/*</UserLoa der>*/}
+                </UserLoader>
             </DataContext.Provider>
         </ReactKeycloakProvider>
     )

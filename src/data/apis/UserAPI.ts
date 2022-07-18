@@ -54,6 +54,9 @@ class UserAPI implements UserData {
 
         }
 
+        //@ts-ignore
+        keycloak.login()
+
         return Promise.resolve(undefined)
 
     }

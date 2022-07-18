@@ -27,7 +27,7 @@ export const Login = () => {
             }
 
             sessionStorage.setItem("user", JSON.stringify(user))
-            navigate('/home')
+            // navigate('/home')
         })
 
     }

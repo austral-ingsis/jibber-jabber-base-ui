@@ -6,6 +6,7 @@ import { Unauthenticated } from '../components/unauthenticated'
 import { isNotUndefined } from '../utils/undefined'
 import { UserContext } from '../components/contexts/userContext'
 import keycloak from "../Keycloak";
+import {Login} from "./Login";
 
 export type UserLoaderProps = {
   children: ReactNode
@@ -44,7 +45,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
     case 'loading':
       return <Loading/>
     case 'unauthenticated':
-      return <Unauthenticated/>
+      return <Login/>
     case 'loaded':
       return (
           <UserContext.Provider value={state.user}>

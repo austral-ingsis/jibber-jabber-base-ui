@@ -12,7 +12,7 @@ export const Login = () => {
     const redirect = () => {
 
         keycloak.login( {
-            // redirectUri:  'https://jbbrjbbr2202.store/home',
+            redirectUri:  'https://jbbrjbbr2202.store/home',
 
         } ).then(() => {
 

@@ -183,7 +183,7 @@ class UserAPI implements UserData {
         // }).then(r => r.json()).then(data => data.content)
 
 
-        return fetch(`${apiURL}/toggleFollow`, {
+        return fetch(`${apiURL}/toggleFollow/`, {
             method: 'POST',
             credentials: 'same-origin',
             headers: {

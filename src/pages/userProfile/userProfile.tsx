@@ -65,6 +65,8 @@ export const UserProfile = () => {
   const handleFollowToggle = useCallback((userId: string) => {
     userData.toggleFollow(userId, isFollowed)
         .then(() => load())
+
+    setIsFollowed(!isFollowed)
   }, [userData, userId])
 
   const [userInfo, setUserInfo] = useState(user)

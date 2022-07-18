@@ -13,10 +13,10 @@ export const MainRouter = () => {
   return (
     <Routes>
         {/*PUBLIC*/}
-        <Route path={'/'} element={<Login/>}/>
+        <Route path={'/'} element={<Home/>}/>
         {/*PRIVATE*/}
         {/*<Route path={'/but'} element={<button onClick={() => navigate('/home')}>To home</button>}/>*/}
-        <Route path="/home/*" element={ <Home/> }/>
+        {/*<Route path="/home/*" element={ <Home/> }/>*/}
         <Route path="/users/:userId" element={ <UserProfile/> }/>
         <Route path="/posts/:postId" element={ <PostPage/> }/>
     </Routes>

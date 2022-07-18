@@ -9,6 +9,7 @@ import keycloak from "../Keycloak";
 import {ReactKeycloakProvider} from "@react-keycloak/web";
 import {postAPI} from "../data/apis/PostAPI";
 import {userAPI} from "../data/apis/UserAPI";
+import {User} from "../data/users";
 
 
 export const App = () => {
@@ -35,6 +36,21 @@ export const App = () => {
             console.log(token.token)
             if(token.token) sessionStorage.setItem("token", token.token )
             console.log(keycloak.tokenParsed)
+
+            const kc = keycloak.tokenParsed
+
+            if(kc?.sub){
+                const user: User = {
+
+                    id: kc?.sub,
+                    displayName: kc?.given_name + " " + kc?.family_name,
+                    username: kc?.preferred_username
+
+                }
+
+                sessionStorage.setItem("user", JSON.stringify(user))
+            }
+
         }}>
             <DataContext.Provider value={dataContainer}>
                 {/*<UserLoader>*/}

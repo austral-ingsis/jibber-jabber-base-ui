@@ -42,7 +42,6 @@ export const UserLoader = ({children}: UserLoaderProps) => {
     case 'loading':
       return <Loading/>
     case 'unauthenticated':
-      keycloak.login()
       return <Unauthenticated/>
     case 'loaded':
       return (

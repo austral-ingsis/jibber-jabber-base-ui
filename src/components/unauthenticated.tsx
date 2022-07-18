@@ -6,21 +6,30 @@ export const Unauthenticated = () => {
 
 
     useEffect(() => {
-        let success = false
-        while(!success){
-            try {
-                keycloak.login({
-                    redirectUri: 'https://jbbrjbbr2202.store/',
-                })
-                success = true
-            }catch (e) {
-                success = false
-                console.log(e)
-            }
-        }
+
+        login()
+
+            // try {
+            //     keycloak.login({
+            //         redirectUri: 'https://jbbrjbbr2202.store/',
+            //     })
+            // }catch (e) {
+            //     console.log(e)
+            // }
 
 
     }, [])
+
+    const login = () => {
+        try {
+            keycloak.login({
+                redirectUri: 'https://jbbrjbbr2202.store/',
+            })
+        }catch (e) {
+            console.log(e)
+            login()
+        }
+    }
 
     if(keycloak === undefined){
         return(<div>Keycloak loading...</div>)

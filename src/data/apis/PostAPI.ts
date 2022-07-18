@@ -51,11 +51,14 @@ class PostAPI implements PostData {
 
     getFeedPosts(): Promise<Post[]> {
 
+        console.log(keycloak.token)
+        keycloak.loadUserInfo().then(r => console.log(r))
+
         let token
 
-        if(keycloak.token) token = keycloak.token
-        else if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
+        if(sessionStorage.getItem("token")) token = sessionStorage.getItem("token")
 
+        console.log(token)
 
         return fetch(`${apiURL}/getAllPosts/`, {
             method: 'GET',

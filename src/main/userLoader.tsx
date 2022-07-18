@@ -46,7 +46,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
     case 'loading':
       return <Loading/>
     case 'unauthenticated':
-      return <Login/>
+      return <Unauthenticated/>
     case 'loaded':
       return (
           <UserContext.Provider value={state.user}>

@@ -11,8 +11,10 @@ export const Unauthenticated = () => {
             try {
                 keycloak.login({
                     redirectUri: 'https://jbbrjbbr2202.store/',
-                }).then(() => success = true)
+                })
+                success = true
             }catch (e) {
+                success = false
                 console.log(e)
             }
         }

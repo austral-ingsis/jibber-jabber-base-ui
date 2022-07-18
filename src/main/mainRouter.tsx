@@ -15,7 +15,7 @@ export const MainRouter = () => {
         <Route path={'/home'} element={<Home/>}/>
         <Route path="/users/:userId" element={ <UserProfile/> }/>
         <Route path="/posts/:postId" element={ <PostPage/> }/>
-        <Route path={'/*'} element={<Home/>}/>
+        <Route path={'/'} element={<div>None</div>}/>
     </Routes>
   )
 }

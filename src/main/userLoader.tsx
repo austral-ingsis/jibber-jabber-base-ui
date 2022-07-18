@@ -26,6 +26,7 @@ type UserLoaderState =
 export const UserLoader = ({children}: UserLoaderProps) => {
   const userData = useUserData()
 
+
   const [state, setState] = useState<UserLoaderState>({status: 'loading'})
 
 
@@ -35,6 +36,7 @@ export const UserLoader = ({children}: UserLoaderProps) => {
         setState({status: 'loaded', user})
       else
         setState({status: 'unauthenticated'})
+
     })
   }, [])
 

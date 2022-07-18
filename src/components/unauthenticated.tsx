@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import keycloak from "../Keycloak";
 
 export const Unauthenticated = () => {
+
+    const [tries, setTries] = useState(0)
 
 
     useEffect(() => {
@@ -11,13 +13,12 @@ export const Unauthenticated = () => {
                 })
             }catch (e) {
                 console.log(e)
-                keycloak.login({
-                    redirectUri: 'https://jbbrjbbr2202.store/',
-                })
+                setTries(tries+1)
+                console.log(tries)
             }
 
 
-    }, [])
+    }, [tries])
 
 
     if(keycloak === undefined){

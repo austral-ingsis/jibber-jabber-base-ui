@@ -54,11 +54,11 @@ export const App = () => {
 
         }}>
             <DataContext.Provider value={dataContainer}>
-                {/*<UserLoader>*/}
+                <UserLoader>
                     <BrowserRouter>
                         <MainRouter/>
                     </BrowserRouter>
-                {/*</UserLoader>*/}
+                </UserLoader>
             </DataContext.Provider>
         </ReactKeycloakProvider>
     )

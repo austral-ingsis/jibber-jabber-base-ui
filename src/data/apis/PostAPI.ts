@@ -69,6 +69,10 @@ class PostAPI implements PostData {
             }
         }).then(res => {
 
+            if(res.status === 401) {
+                keycloak.login()
+            }
+
             return res.json()
         }).then(data => {
 
